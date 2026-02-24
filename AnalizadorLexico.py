@@ -1,48 +1,40 @@
+# AnalizadorLexico.py
 import re
 
 class AnalizadorLexico:
-    
     def __init__(self, expresion: str):
         self.expresion = expresion
         self.tokens = []
-        
-        # definifoms la expresiones reguarales
         self.patrones = [
-            ("NUMERO", r'\d+'),
-            ("CADENA", r"'[^']*'"),
-            ("OP",r'int|string'),
-            ("VAR",r'[a-zA-Z_][a-zA-Z0-9_]*'),
-            ("SUMA", r'\+'),
-            ("RESTA", r'-'),
-            ("MULT", r'\*'),
-            ("DIV", r'/'),
-            ("IGUAL",r'\='),
+            ("NUMERO",         r'\d+'),
+            ("CADENA",         r"'[^']*'"),
+            ("OP",             r'int|string'),
+            ("VAR",            r'[a-zA-Z_][a-zA-Z0-9_]*'),
+            ("SUMA",           r'\+'),
+            ("RESTA",          r'-'),
+            ("MULT",           r'\*'),
+            ("DIV",            r'/'),
+            ("IGUAL",          r'\='),
             ("PARENTESIS_IZQ", r'\('),
             ("PARENTESIS_DER", r'\)'),
-            ("ESPACIO", r'\s+'),
+            ("ESPACIO",        r'\s+'),
         ]
 
     def analizar(self):
         texto = self.expresion
-        posicion=0
+        posicion = 0
         while posicion < len(texto):
-            for tipo, patron  in self.patrones:
-                #obtenesmo ñas expresiones regularares que estan en una cadema cruda y los converiutmos en un objecto
-                expresion_regulares= re.compile(patron)
-                # paraa ver si conicide al inicio con las expresionde regulares y agregamos la poscione paara iterar o pasar al siguioente
-                coincide= expresion_regulares.match(texto,posicion)
+            coincide = None
+            for tipo, patron in self.patrones:
+                expresion_regular = re.compile(patron)
+                coincide = expresion_regular.match(texto, posicion)
                 if coincide:
-                    # para mostrar los que conincidio
-                    valor= coincide.group(0)
-                    #ignoramos los espacion
+                    valor = coincide.group(0)
                     if tipo != 'ESPACIO':
-                        #lo agregamos en los tokens y 
                         self.tokens.append({"TOKEN": tipo, "LEXEMA": valor})
-                    # obetneidop el ultimo indice
-                    posicion= coincide.end()
+                    posicion = coincide.end()
                     break
             if not coincide:
                 raise SyntaxError(f"Error lexicon. simbolo no encontrado {texto[posicion]}")
 
         return self.tokens
-    
