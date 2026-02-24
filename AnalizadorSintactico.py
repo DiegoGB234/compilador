@@ -1,5 +1,4 @@
-
-from AST import NodoNumero, NodoOperacion, NodoDeclaracion
+from AST import NodoNumero, NodoOperacion, NodoDeclaracion,NodoString
 
 class AnalizadorSintactico:
     def __init__(self, tokens):
@@ -55,7 +54,10 @@ class AnalizadorSintactico:
         if token['TOKEN'] == 'NUMERO':
             self.pos += 1
             return NodoNumero(token['LEXEMA'])  # ← retorna nodo
-
+        elif token['TOKEN'] == 'CADENA':
+            self.pos +=1
+            return NodoString(token['LEXEMA'])
+        
         elif token['TOKEN'] == 'PARENTESIS_IZQ':
             self.pos += 1
             valor = self.expresion()

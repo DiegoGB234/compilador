@@ -1,5 +1,5 @@
 # AnalizadorSemantico.py
-from AST import NodoNumero, NodoOperacion, NodoDeclaracion
+from AST import NodoNumero, NodoOperacion, NodoDeclaracion,NodoString
 
 class AnalizadorSemantico:
     def __init__(self):
@@ -14,7 +14,8 @@ class AnalizadorSemantico:
 
         elif isinstance(nodo, NodoNumero):
             return self.analizar_numero(nodo)
-
+        elif isinstance(nodo,NodoString):
+            return self.abnalizar_cadena(nodo)
         else:
             raise Exception(f"Nodo desconocido: {nodo}")
 
@@ -61,3 +62,5 @@ class AnalizadorSemantico:
 
     def analizar_numero(self, nodo):
         return int(nodo.valor)
+    def abnalizar_cadena(self,nodo):
+        return str(nodo.valor)

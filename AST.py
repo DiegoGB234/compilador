@@ -4,7 +4,11 @@ class NodoNumero:
 
     def __repr__(self):
         return f"Numero({self.valor})"
-
+class NodoString:
+    def __init__(self, valor):
+        self.valor = valor
+    def __repr__(self):
+        return f"NodoString({self.valor})"
 
 class NodoOperacion:
     def __init__(self, izquierda, operador, derecha):
