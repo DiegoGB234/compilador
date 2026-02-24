@@ -42,7 +42,7 @@ class AnalizadorLexico:
                     posicion= coincide.end()
                     break
             if not coincide:
-                raise SyntaxError(f"Error lexcion. simbolo no encontrado {texto[posicion]}")
+                raise SyntaxError(f"Error lexicon. simbolo no encontrado {texto[posicion]}")
 
         return self.tokens
     

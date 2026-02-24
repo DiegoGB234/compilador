@@ -15,7 +15,11 @@ import AnalizadorSintactico as sintatico
 def ejecutar_codigo():
     codigo = area_codigo.get("1.0", tk.END)
 
-    consola.delete("1.0", tk.END)
+    #consola.delete("1.0", tk.END)
+    consola.config(state=tk.NORMAL)
+
+    consola.insert(tk.END, "Ejecutando código...\n")
+    consola.insert(tk.END, ">")
 
     # Capturar salida
     salida = io.StringIO()
@@ -36,6 +40,8 @@ def ejecutar_codigo():
 
     sys.stdout = sys.__stdout__
     consola.insert(tk.END, salida.getvalue())
+
+    consola.config(state=tk.DISABLED)
 
 
 # -----------------------------
@@ -72,7 +78,7 @@ btn_ejecutar = tk.Button(
 btn_ejecutar.pack(pady=5)
 
 
-label_consola = tk.Label(ventana, text="Salida / Consola")
+label_consola = tk.Label(ventana, text="Salida")
 label_consola.pack()
 
 consola = scrolledtext.ScrolledText(
@@ -80,7 +86,9 @@ consola = scrolledtext.ScrolledText(
     height=10,
     bg="black",
     fg="lime",
-    font=("Consolas", 11)
+    font=("Consolas", 11),
+    state=tk.DISABLED
+    
 )
 consola.pack(fill="both", expand=True, padx=10, pady=5)
 
