@@ -9,14 +9,17 @@ class AnalizadorLexico:
         # definifoms la expresiones reguarales
         self.patrones = [
             ("NUMERO", r'\d+'),
+            ("CADENA", r"'[^']*'"),
+            ("OP",r'int|string'),
+            ("VAR",r'[a-zA-Z_][a-zA-Z0-9_]*'),
             ("SUMA", r'\+'),
             ("RESTA", r'-'),
             ("MULT", r'\*'),
             ("DIV", r'/'),
+            ("IGUAL",r'\='),
             ("PARENTESIS_IZQ", r'\('),
             ("PARENTESIS_DER", r'\)'),
             ("ESPACIO", r'\s+'),
-            ("")
         ]
 
     def analizar(self):
