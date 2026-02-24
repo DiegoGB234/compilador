@@ -5,6 +5,7 @@ import io
 
 import AnalizadorLexico as lexico
 import AnalizadorSintactico as sintatico
+import AnalizadorSematico as semantico
 
 
 #Primero obtendremos los tokens y verficar si lo que ser resive de las expresiones regualres se encuentren n los tokes que definimos
@@ -28,11 +29,18 @@ def ejecutar_codigo():
     try:
         ## Ejecutar el código ingresado
         anali_lexico = lexico.AnalizadorLexico(codigo)
-        tokes=anali_lexico.analizar()
+        tokens=anali_lexico.analizar()
+        print("Tokens:", tokens)
+
 
         # ahoora apartir de los tokens que tenenemos  aplicacmos el analicis sintatico 
-        anali_sintatico = sintatico.AnalizadorSintactico(tokes)
-        anali_sintatico.analizar()
+        anali_sintatico = sintatico.AnalizadorSintactico(tokens)
+        ast = anali_sintatico.analicis()
+        print("\nAST:", ast)
+
+        anali_semantico = semantico.AnalizadorSemantico()
+        anali_semantico.analizar(ast)
+
         ##exec(codigo)
 
     except Exception as e:

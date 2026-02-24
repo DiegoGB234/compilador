@@ -37,8 +37,8 @@ class AnalizadorSemantico:
             'valor': valor
         }
 
-        print(f"✓ Variable '{nodo.variable}' declarada como '{nodo.tipo}' con valor '{valor}'")
-        print(f"✓ Tabla de símbolos: {self.tabla_simbolos}")
+        print(f"Variable '{nodo.variable}' declarada como '{nodo.tipo}' con valor '{valor}'")
+        print(f"Tabla de símbolos: {self.tabla_simbolos}")
         return valor
 
     def analizar_operacion(self, nodo):
